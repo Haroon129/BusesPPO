@@ -1,6 +1,7 @@
 from Estacion import Estacion
 from bus import Buses
 from billetes import Billetes
+import random
 
 def validar_numero(mensaje, minimo=None, maximo=None):
     while True:
@@ -64,26 +65,48 @@ def estado_bus():
     print(bus)
 
 def salir():
-    print("QUE PASE UNA BUENA TARDE")
+    print("QUE TENGA UN BUEN DIA")
     exit()
 
-opciones = {
-    1: crear_bus,
-    2: vender_billete,
-    3: devolver_billete,
-    4: estado_bus,
-    0: salir,
-}
-estacion = Estacion()
+def crear_n_estaciones(num_estaciones):
+    estaciones = []
+    for i in range (num_estaciones):
+        random.shuffle(localidades)
+        estaciones.append(Estacion(localidades.pop()))
+
+    return estaciones
+
+
+
+def menu_estacion():
+    opciones = {
+        1: crear_bus,
+        2: vender_billete,
+        3: devolver_billete,
+        4: estado_bus,
+        0: salir,
+    }
+    while True:
+        opcion = validar_numero(
+            "Seleccione una Opcion:\n"\
+            "   1.- Crear Bus.\n"\
+            "   2.- Venta de Billetes\n"\
+            "   3.- Devolución de billetes.\n"\
+            "   4.- Estado del bus.\n"\
+            "   0.- Salir.\n",
+            0,4)
+        accion = opciones.get(opcion)
+        accion()
+
+estacion = Estacion("")
+localidades = ["Barcelona", "Madrid", "Malaga", "Sevilla"]
+
 print("BUENOS DIAS")
-while True:
-    opcion = validar_numero(
-        "Seleccione una Opcion:\n"\
-        "   1.- Crear Bus.\n"\
-        "   2.- Venta de Billetes\n"\
-        "   3.- Devolución de billetes.\n"\
-        "   4.- Estado del bus.\n"\
-        "   0.- Salir.\n",
-        0,4)
-    accion = opciones.get(opcion)
-    accion()
+num_estacions = validar_numero("Cuantas estaciones desea abrir?\n"\
+                               f"   Disponemos de {len(localidades)} localidades\n"\
+                                "   Se necesita un minimo de 2 estaciones\n",2, len(localidades))
+
+estaciones = crear_n_estaciones(num_estacions)
+
+
+menu_estacion()
