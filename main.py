@@ -33,7 +33,7 @@ def vender_billete():
         return
     nombre = input("Indique su nombre")
     apellido = input("Indique su apellido")
-    billete = Billete(nombre,apellido)
+    billete = Billetes(nombre,apellido)
     if bus.billete_noDup(billete):
         print("- Ya hay un billete con dicho Nombre - Apellido")
         return

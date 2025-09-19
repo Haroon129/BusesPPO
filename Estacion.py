@@ -11,7 +11,7 @@ class Estacion:
 
     def get_bus(self,id):
         return self.__buses[id]
-
+    
     def get_buses(self):
         for i in range(len(self.__buses)):
             print(self.__buses[i])
