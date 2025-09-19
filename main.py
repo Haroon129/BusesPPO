@@ -5,7 +5,7 @@ from billetes import Billetes
 def validar_numero(mensaje, minimo=None, maximo=None):
     while True:
         try:
-            valor = int(input(mensaje))
+            valor = int(input(mensaje+"\n"))
             if minimo is not None and maximo is not None:
                 if not (minimo <= valor <= maximo):
                     print(f"Introduce un número entre {minimo} y {maximo}.")
@@ -31,8 +31,8 @@ def vender_billete():
     if bus.calcularAsientosRestantes() == 0:
         print("- No hay asientos disponibles")
         return
-    nombre = input("Indique su nombre")
-    apellido = input("Indique su apellido")
+    nombre = input("Indique su nombre\n")
+    apellido = input("Indique su apellido\n")
     billete = Billetes(nombre,apellido)
     if bus.billete_noDup(billete):
         print("- Ya hay un billete con dicho Nombre - Apellido")
@@ -47,8 +47,8 @@ def devolver_billete():
     bus_id = validar_numero(f"De qué bus quiere devolver el billete? (0 a {estacion.num_buses()-1}): ", 0, estacion.num_buses() - 1)
     bus = estacion.get_bus(bus_id)
 
-    nombre = input("Indique su nombre")
-    apellido = input("Indique su apellido")
+    nombre = input("Indique su nombre\n")
+    apellido = input("Indique su apellido\n")
 
     if bus.destruir_billete(nombre,apellido):
         print("- El billete se ha devuelto con exito")
